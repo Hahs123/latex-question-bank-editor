@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Question Bank Editor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>📋 QB Editor</h1>
+            </div>
+            
+            <nav class="nav-sections">
+                <button class="nav-btn active" data-section="metadata">
+                    <span class="icon">⚙️</span> Metadata
+                </button>
+                <button class="nav-btn" data-section="part1">
+                    <span class="icon">❶</span> MCQ (Part 1)
+                </button>
+                <button class="nav-btn" data-section="part2">
+                    <span class="icon">❷</span> Fill Blanks (Part 2)
+                </button>
+                <button class="nav-btn" data-section="part3">
+                    <span class="icon">❸</span> True/False (Part 3)
+                </button>
+                <button class="nav-btn" data-section="part4">
+                    <span class="icon">❹</span> Matching (Part 4)
+                </button>
+                <button class="nav-btn" data-section="part5">
+                    <span class="icon">❺</span> One-Word (Part 5)
+                </button>
+                <button class="nav-btn" data-section="part6">
+                    <span class="icon">❻</span> Activities (Part 6)
+                </button>
+            </nav>
+
+            <div class="sidebar-actions">
+                <button id="exportBtn" class="btn btn-primary">📥 Export LaTeX</button>
+                <button id="importBtn" class="btn btn-secondary">📤 Import JSON</button>
+                <button id="previewBtn" class="btn btn-secondary">👁️ Preview</button>
+            </div>
+        </aside>
+
+        <!-- Main Editor Area -->
+        <main class="editor">
+            <!-- Metadata Section -->
+            <section id="metadata" class="section active">
+                <h2>Document Metadata</h2>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="docTitle" placeholder="SCIENCE OBJECTIVE QUESTION BANK">
+                </div>
+                <div class="form-group">
+                    <label>Chapter/Topic</label>
+                    <input type="text" id="docChapter" placeholder="Chapter: Matter in Our Surroundings">
+                </div>
+                <div class="form-group">
+                    <label>Total Questions (auto-calculated)</label>
+                    <input type="number" id="totalQuestions" placeholder="135" readonly>
+                </div>
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="printAnswers">
+                    <label>Print Answers (Show answer key)</label>
+                </div>
+                <div class="form-group">
+                    <label>Margin (inches)</label>
+                    <input type="number" id="margin" placeholder="1" min="0.5" max="2" step="0.1">
+                </div>
+            </section>
+
+            <!-- Part 1: MCQ -->
+            <section id="part1" class="section">
+                <div class="section-header">
+                    <h2>Part 1: Multiple Choice Questions</h2>
+                    <button class="btn btn-add" id="addMCQ">+ Add Question</button>
+                </div>
+                <div id="mcqContainer" class="questions-container"></div>
+            </section>
+
+            <!-- Part 2: Fill Blanks -->
+            <section id="part2" class="section">
+                <div class="section-header">
+                    <h2>Part 2: Fill in the Blanks</h2>
+                    <button class="btn btn-add" id="addFillBlank">+ Add Question</button>
+                </div>
+                <div id="fillBlankContainer" class="questions-container"></div>
+            </section>
+
+            <!-- Part 3: True/False -->
+            <section id="part3" class="section">
+                <div class="section-header">
+                    <h2>Part 3: True or False</h2>
+                    <button class="btn btn-add" id="addTrueFalse">+ Add Question</button>
+                </div>
+                <div id="trueFalseContainer" class="questions-container"></div>
+            </section>
+
+            <!-- Part 4: Matching -->
+            <section id="part4" class="section">
+                <div class="section-header">
+                    <h2>Part 4: Match the Following</h2>
+                    <button class="btn btn-add" id="addMatchSet">+ Add Set</button>
+                </div>
+                <div id="matchContainer" class="questions-container"></div>
+            </section>
+
+            <!-- Part 5: One-Word -->
+            <section id="part5" class="section">
+                <div class="section-header">
+                    <h2>Part 5: One-Word / One-Sentence Answers</h2>
+                    <button class="btn btn-add" id="addOneWord">+ Add Question</button>
+                </div>
+                <div id="oneWordContainer" class="questions-container"></div>
+            </section>
+
+            <!-- Part 6: Activities -->
+            <section id="part6" class="section">
+                <div class="section-header">
+                    <h2>Part 6: Activity-Based Questions</h2>
+                    <button class="btn btn-add" id="addActivity">+ Add Activity</button>
+                </div>
+                <div id="activityContainer" class="questions-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="fileInput" accept=".json" style="display: none;">
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>LaTeX Preview</h2>
+            <textarea id="latexPreview" readonly></textarea>
+            <button id="copyLatexBtn" class="btn btn-primary">📋 Copy to Clipboard</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
